@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "312257051181",
+    "project_id": "mynotes-vishesh",
+    "storage_bucket": "mynotes-vishesh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312257051181:android:ccd4d11606230cd93796a4",
+        "android_client_info": {
+          "package_name": "com.doit.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ_72zjtGJ8rpfReFn-wGloNuTjmfTlHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
