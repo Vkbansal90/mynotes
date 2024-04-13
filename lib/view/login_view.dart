@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as devtools show log;
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/routes.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -65,16 +66,32 @@ class _LoginViewState extends State<LoginView> {
                   password: password,
                 );
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/notes/',
+                  notesRoute,
                   (route) => false,
                 );
                 devtools.log(userCredential.toString());
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
-                  devtools.log('user-not-found');
+                  await showErrorDiaglog(
+                    context,
+                    'User Not Found',
+                  );
                 } else if (e.code == 'wrong-password') {
-                  devtools.log('wrong password');
+                  await showErrorDiaglog(
+                    context,
+                    'Wrong credentials',
+                  );
+                } else {
+                  await showErrorDiaglog(
+                    context,
+                    'Error: ${e.code}',
+                  );
                 }
+              } catch (e) {
+                await showErrorDiaglog(
+                  context,
+                  e.toString(),
+                );
               }
             },
             style: const ButtonStyle(
@@ -87,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                '/register/',
+                registerRoute,
                 (route) => false,
               );
             },
@@ -102,4 +119,25 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
+}
+
+Future<void> showErrorDiaglog(
+  BuildContext context,
+  String text,
+) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('An error occurred'),
+      content: Text(text),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('ok'),
+        )
+      ],
+    ),
+  );
 }
