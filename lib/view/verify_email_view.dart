@@ -27,9 +27,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               final user = FirebaseAuth.instance.currentUser;
               await user?.sendEmailVerification();
             },
-            child: const Text('send email verification'),
             style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.blue)),
+            child: const Text('send email verification'),
           )
         ],
       ),
